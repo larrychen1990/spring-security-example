@@ -11,7 +11,7 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> Login <b class="caret"></b>
+						data-toggle="dropdown"> Login <b class="caret" id="login_caret"></b>
 					</a>
 						<ul class="dropdown-menu">
 							<li>

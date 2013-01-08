@@ -5,7 +5,7 @@
 <c:url value="/resources" var="resource" />
 <html>
 <head>
-<%-- <tiles:insertAttribute name="title" ignore="true" /> --%>
+<title><tiles:insertAttribute name="title" ignore="true" /></title>
 <link href="${resource}/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="${resource}/css/bootstrap.css" rel="stylesheet">
 <link href="${resource}/css/docs.css" rel="stylesheet">
