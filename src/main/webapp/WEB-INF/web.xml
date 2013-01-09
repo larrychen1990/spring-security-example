@@ -15,6 +15,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<listener>
+		<listener-class>com.acme.doktorics.init.UserServletContext</listener-class>
+	</listener>
+
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
@@ -32,6 +36,6 @@
 	</servlet-mapping>
 
 
-	
+
 
 </web-app>
