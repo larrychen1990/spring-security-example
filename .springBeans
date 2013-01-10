@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/tiles-defs.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/tiles.xml</config>
+		<config>src/main/webapp/WEB-INF/spring-security.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
