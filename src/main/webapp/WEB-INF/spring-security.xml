@@ -5,28 +5,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<security:http auto-config="false" use-expressions="true"
-		entry-point-ref="authenticationEntryPoint">
-		<security:intercept-url pattern="/admin*"
-			access="hasRole('ROLE_ADMIN')" />
-		<!-- <security:form-login login-page="/register" -->
-		<!-- default-target-url="/welcome" /> -->
-		<!-- <security:logout logout-url="/logout" -->
-		<!-- logout-success-url="/welcome" /> -->
-		<security:access-denied-handler
-			error-page="/denied" />
-		<security:intercept-url pattern="/register"
-			access="permitAll" />
-		<security:intercept-url pattern="/resources/**"
-			access="permitAll" />
-		<security:intercept-url pattern="/**"
-			access="isAuthenticated()" />
-		<security:custom-filter position="CONCURRENT_SESSION_FILTER"
-			ref="concurrencyFilter" />
-		<security:custom-filter position="FORM_LOGIN_FILTER"
-			ref="authenticationFilter" />
-		<security:custom-filter position="LOGOUT_FILTER"
-			ref="logoutFilter" />
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/admin*" 	access="hasRole('ROLE_ADMIN')" />
+		<security:access-denied-handler error-page="/denied" />
+		<security:intercept-url pattern="/register"	access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/resources/**"	access="permitAll" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+<!-- 		<security:custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter" /> -->
+<!-- 		<security:custom-filter position="LOGOUT_FILTER" ref="logoutFilter" /> -->
+		<security:logout logout-success-url="/logout" />
+		<security:form-login  login-processing-url="/login" login-page="/register" />
 	</security:http>
 
 	<bean id="logoutFilter"
@@ -40,7 +29,7 @@
 
 	<bean id="simpleUrlLogoutSuccessHandler"
 		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"
-		p:defaultTargetUrl="/welcome" />
+		p:defaultTargetUrl="/home" />
 
 	<bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
@@ -49,7 +38,7 @@
 
 	<bean id="customAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
-		p:defaultTargetUrl="/welcome" />
+		p:defaultTargetUrl="/home" />
 
 	<bean id="customAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
@@ -80,27 +69,20 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/securitysample" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="" />
 	</bean>
 
-	<bean id="passwordEncoder"
-		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
-		<constructor-arg value="256" />
-	</bean>
 
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider>
-			<security:password-encoder ref="passwordEncoder" />
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="
-				select username,password, enabled 
-				from user where username=?"
+				select name,password, location, age 
+				from users where name=?"
 				authorities-by-username-query="
-				SELECT u.username, r.name FROM user_role ur 
-                INNER JOIN role r ON r.id = ur.role_id
-				INNER JOIN user u ON u.id = ur.user_id
-				WHERE u.username = ?  " />
+				SELECT name, userRight  FROM users INNER JOIN user_userright 
+				WHERE name = ?  " />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

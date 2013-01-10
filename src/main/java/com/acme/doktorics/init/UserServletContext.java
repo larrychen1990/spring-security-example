@@ -32,9 +32,9 @@ public class UserServletContext implements ServletContextListener{
         // TODO Auto-generated method stub
         UserBuilder builder=new UserBuilder();
         @SuppressWarnings("deprecation")
-        User Adam=builder.create().setName("Adam").setBirthDate(new Date(2001,11,11)).setLocation("Budapest").setUserRight(UserRight.USER_ROLE).setAge(22).build();
+        User Adam=builder.create().setName("Adam").setBirthDate(new Date(2001,11,11)).setLocation("Budapest").setPassword("Adam").setUserRight(UserRight.USER_ROLE).setAge(22).build();
         @SuppressWarnings("deprecation")
-        User Zoli=builder.create().setName("Zoli").setBirthDate(new Date(2001,11,11)).setLocation("Budapest").setUserRight(UserRight.USER_ROLE).setAge(23).build();
+        User Zoli=builder.create().setName("Zoli").setBirthDate(new Date(2001,11,11)).setLocation("Budapest").setPassword("Zoli").setUserRight(UserRight.USER_ROLE).setAge(23).build();
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("persistenceUnit");
         EntityManager manager = factory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();

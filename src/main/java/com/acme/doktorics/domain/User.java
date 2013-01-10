@@ -17,10 +17,19 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User{
 
-	@Id
+	public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
+	private String password;
 	private String location;
 	private Integer age;
 	private Date birthdate;

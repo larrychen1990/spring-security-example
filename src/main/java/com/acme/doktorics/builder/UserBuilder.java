@@ -51,5 +51,11 @@ public class UserBuilder {
         return this;
     }
     
+    public UserBuilder setPassword(String password)
+    {
+        user.setPassword(password);
+        return this;
+    }
+    
     
 }
