@@ -29,7 +29,7 @@ public class UserBuilder {
     
     public UserBuilder setUserRight(UserRight right)
     {
-        user.setUserRight(right);
+        user.getUserRight().add(right);
         return this;
     }
     
