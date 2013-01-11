@@ -29,9 +29,9 @@ public class UserServletContext implements ServletContextListener{
     public void contextInitialized(ServletContextEvent contextEvent) {
        
         Role admin=new Role();
-        admin.setName("ADMIN_ROLE");
+        admin.setName("ROLE_ADMIN");
         Role user=new Role();
-        user.setName("USER_ROLE");
+        user.setName("ROLE_USER");
        
         
         User Zoli=new User();
