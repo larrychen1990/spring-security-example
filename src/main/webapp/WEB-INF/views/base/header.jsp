@@ -18,13 +18,13 @@
 					</a>
 						<ul class="dropdown-menu">
 							<li>
-								<c:url value="j_spring_security_check" var="url" />
+								<c:url value="/register" var="url" />
 								<form:form style="padding-left: 20px; padding-right: 20px;"
 									id="loginForm" modelAttribute="user"  action="${url}">
 									<div class="control-group">
 										<label class="control-label" for="inputEmail">Name</label>
 										<div class="controls">
-											<form:input type="text" path="name" name='j_username' id="inputEmail" placeholder="Name"/>
+											<form:input type="text" path="username" name='j_username' id="inputEmail" placeholder="Name"/>
 										</div>
 									</div>
 									<div class="control-group">

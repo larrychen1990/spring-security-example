@@ -5,54 +5,42 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/admin*" 	access="hasRole(ROLE_ADMIN)" />
-		<security:access-denied-handler error-page="/denied" />
-			<security:intercept-url pattern="/register"	access="permitAll" />
-		<security:intercept-url pattern="/login" access="permitAll" />
-		<security:intercept-url pattern="/denied" access="permitAll" />
-		<security:intercept-url pattern="/resources/**"	access="permitAll" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-		<security:logout logout-success-url="/logout" />
-		<security:form-login  login-processing-url="/login" login-page="/register"  authentication-failure-url="/denied"/>
+	<security:http auto-config="false" use-expressions="true"
+		entry-point-ref="authenticationEntryPoint">
+		<security:intercept-url pattern="/admin*"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:access-denied-handler
+			error-page="/denied" />
+		<security:intercept-url pattern="/register"
+			access="permitAll" />
+		<security:intercept-url pattern="/resources/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="authenticationFilter" />
 	</security:http>
-
-	<bean id="logoutFilter"
-		class="org.springframework.security.web.authentication.logout.LogoutFilter">
-		<constructor-arg ref="securityContextLogoutHandler" />
-		<constructor-arg ref="simpleUrlLogoutSuccessHandler" />
-	</bean>
-
-	<bean id="securityContextLogoutHandler"
-		class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
-
-	<bean id="simpleUrlLogoutSuccessHandler"
-		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"
-		p:defaultTargetUrl="/home" />
 
 	<bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<constructor-arg value="/register" />
 	</bean>
 
+
 	<bean id="customAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
-		p:defaultTargetUrl="/home" />
+		p:defaultTargetUrl="/welcome" />
 
 	<bean id="customAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
 		p:defaultFailureUrl="/denied" />
+
 
 	<bean id="authenticationFilter"
 		class="com.acme.doktorics.filter.SpecialUserNamePasswordAuthFilter"
 		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
 		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
 		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />
-
-	<bean id="concurrencyFilter"
-		class="org.springframework.security.web.session.ConcurrentSessionFilter">
-		<constructor-arg ref="sessionRegistry"></constructor-arg>
-	</bean>
 
 	<bean id="sessionRegistry"
 		class="org.springframework.security.core.session.SessionRegistryImpl" />
@@ -62,6 +50,7 @@
 		p:maximumSessions="1" p:exceptionIfMaximumExceeded="true">
 		<constructor-arg name="sessionRegistry" ref="sessionRegistry" />
 	</bean>
+
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -77,11 +66,13 @@
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="
-				select name,password, location, age 
-				from users where name=?"
+				select username,password, enabled 
+				from user where username=?"
 				authorities-by-username-query="
-				SELECT name, password, userRight  FROM users INNER JOIN user_userright 
-				WHERE name = ?  " />
+				SELECT u.username, r.name FROM user_role ur 
+                INNER JOIN role r ON r.id = ur.role_id
+				INNER JOIN user u ON u.id = ur.user_id
+				WHERE u.username = ?  " />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

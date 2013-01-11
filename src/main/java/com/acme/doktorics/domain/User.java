@@ -1,42 +1,53 @@
 package com.acme.doktorics.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false)
     private String password;
-    private String location;
-    private Integer age;
-    private Date birthdate;
-    @JoinTable
-    private List<String> rights = new ArrayList<String>();
+    @Column(nullable = false)
+    private boolean enabled = true;
+    @Column(nullable = false, unique = true)
+    @Email
+    private String email;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private Set<Role> roles = new HashSet<Role>();
+    
+   
+    
 
-    public Date getBirthdate() {
-        return birthdate;
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void removeRole(Role role) {
+        roles.remove(role);
     }
 
-    public User() {
-
-    }
 
     public long getId() {
         return id;
@@ -44,6 +55,22 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -54,79 +81,20 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public String getLocation() {
-        return location;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public List<UserRight> getRights() {
-        List<UserRight> rights = new ArrayList<UserRight>();
-        for (String item : this.rights) {
-            rights.add(UserRight.parse(item));
-        }
-        return rights;
-    }
-
-    public void setRights(List<UserRight> userRight2) {
-        for (UserRight item : userRight2) {
-            if (this.rights.add(item.getRight()))
-            {
-                this.rights.add(item.getRight());
-            }
-        }
-
-    }
-
-    public enum UserRight {
-
-        ADMIN_ROLE("ADMIN_ROLE"),
-        USER_ROLE("USER_ROLE");
-
-        private String right;
-
-        private UserRight(String right)
-        {
-            this.right = right;
-        }
-
-        public String getRight() {
-            return right;
-        }
-
-        public void setRight(String right) {
-            this.right = right;
-        }
-
-        public static UserRight parse(String name) {
-            UserRight right = null; // Default
-            for (UserRight item : UserRight.values()) {
-                if (item.getRight() == name) {
-                    right = item;
-                    break;
-                }
-            }
-            return right;
-        }
-
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 }
