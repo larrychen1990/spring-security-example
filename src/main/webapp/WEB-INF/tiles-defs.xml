@@ -23,6 +23,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/custom/error.jsp" />
 	</definition>
 	
+	<definition name="welcome" extends="baseLayout">
+		<put-attribute name="title" value="Sec Sample" />
+		<put-attribute name="body" value="/WEB-INF/views/custom/welcome.jsp" />
+	</definition>
+	
+	
 	<definition name="login" extends="baseLayout">
 		
 	</definition>
