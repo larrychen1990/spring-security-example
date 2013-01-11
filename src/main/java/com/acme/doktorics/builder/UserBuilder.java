@@ -3,7 +3,6 @@ package com.acme.doktorics.builder;
 import java.util.Date;
 
 import com.acme.doktorics.domain.User;
-import com.acme.doktorics.domain.UserRight;
 
 public class UserBuilder {
     private User user;
@@ -27,9 +26,9 @@ public class UserBuilder {
         return this;
     }
     
-    public UserBuilder setUserRight(UserRight right)
+    public UserBuilder setUserRight(User.UserRight right)
     {
-        user.getUserRight().add(right);
+        user.getRights().add(right);
         return this;
     }
     

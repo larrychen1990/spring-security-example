@@ -18,19 +18,19 @@
 					</a>
 						<ul class="dropdown-menu">
 							<li>
-								<c:url value="/login" var="url" />
+								<c:url value="j_spring_security_check" var="url" />
 								<form:form style="padding-left: 20px; padding-right: 20px;"
 									id="loginForm" modelAttribute="user"  action="${url}">
 									<div class="control-group">
 										<label class="control-label" for="inputEmail">Name</label>
 										<div class="controls">
-											<form:input type="text" path="name" id="inputEmail" placeholder="Name"/>
+											<form:input type="text" path="name" name='j_username' id="inputEmail" placeholder="Name"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="inputPassword">Password</label>
 										<div class="controls">
-											<form:input type="password" path="password" id="inputPassword"
+											<form:input type="password" path="password"  name="j_password" id="inputPassword"
 												placeholder="Password"/>
 										</div>
 									</div>
@@ -39,7 +39,7 @@
 											<label class="checkbox"> <input  type="checkbox"></input>
 												Remember me
 											</label>
-											<form:button type="submit" class="btn">Sign in</form:button>
+											<form:button type="submit" name="submit" class="btn">Sign in</form:button>
 										</div>
 									</div>
 								</form:form>
