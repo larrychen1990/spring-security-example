@@ -26,15 +26,6 @@ public class SimpleUserService implements UserService {
 	protected static final Logger logger = LoggerFactory
 			.getLogger(SimpleUserService.class);
 
-	@PreRemove
-	public void beforeRemove(User user) {
-		for (Role role : roleService.findAll()) {
-			if (role.getUsers().contains(user)) {
-				role.getUsers().remove(user);
-				roleService.update(role);
-			}
-		}
-	}
 
 	@Override
 	public List<User> findAll() {
