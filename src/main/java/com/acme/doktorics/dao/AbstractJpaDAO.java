@@ -51,7 +51,7 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
     @SuppressWarnings("unchecked")
     @Override
     public List<T> findAllBySorting(String field, Sorting sorting) {
-        String queryString = "SELECT u FROM " + clazz.getSimpleName() + " ORDER BY " + field + " " + sorting.getSorter();
+        String queryString = "SELECT u FROM " + clazz.getSimpleName() + " u ORDER BY u." + field + " " + sorting.getSorter();
         Query query = entityManager.createQuery(queryString);
         return query.getResultList();
     }
