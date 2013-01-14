@@ -9,10 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-public class SpecialUserNamePasswordAuthFilter extends UsernamePasswordAuthenticationFilter {
+public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter {
 
     
-    private final Logger logger = LoggerFactory.getLogger(SpecialUserNamePasswordAuthFilter.class);
+    private final Logger logger = LoggerFactory.getLogger(CustomAuthFilter.class);
     
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {

@@ -71,4 +71,11 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
         entityManager.remove(entity);
     }
 
+    @Override
+    public T findElementByName(String field, String name) {
+        String queryString = "SELECT u FROM " + clazz.getSimpleName() + " u WHERE u."+field+"='"+name+"'";
+        Query query = entityManager.createQuery(queryString);
+        return (T) query.getSingleResult();
+    }
+
 }

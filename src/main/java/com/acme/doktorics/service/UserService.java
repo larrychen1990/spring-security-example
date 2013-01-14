@@ -9,8 +9,6 @@ public interface UserService{
 
 	List<User> findAll();
 	
-	
-
 	void delete(String id);
 
 	void save(User messageObject);

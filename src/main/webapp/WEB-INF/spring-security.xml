@@ -19,6 +19,8 @@
 			access="isAuthenticated()" />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="authenticationFilter" />
+		<security:custom-filter ref="logoutFilter"
+			position="LOGOUT_FILTER" />
 	</security:http>
 
 	<bean id="authenticationEntryPoint"
@@ -26,6 +28,19 @@
 		<constructor-arg value="/login" />
 	</bean>
 
+
+	<bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg ref="securityContextLogoutHandler" />
+		<constructor-arg ref="simpleUrlLogoutSuccessHandler" />
+	</bean>
+	
+	<bean id="securityContextLogoutHandler"
+		class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+	
+	<bean id="simpleUrlLogoutSuccessHandler"
+		class="com.acme.doktorics.filter.CustomLogoutFilter"
+		p:defaultTargetUrl="/logout" />
+	
 
 	<bean id="customAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
@@ -36,8 +51,7 @@
 		p:defaultFailureUrl="/denied" />
 
 
-	<bean id="authenticationFilter"
-		class="com.acme.doktorics.filter.SpecialUserNamePasswordAuthFilter"
+	<bean id="authenticationFilter" class="com.acme.doktorics.filter.CustomAuthFilter"
 		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
 		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
 		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />

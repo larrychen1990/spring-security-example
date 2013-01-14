@@ -24,11 +24,11 @@ public class SimpleUserService implements UserService {
     @Override
     public List<User> findAll()
     {
-        List<User> messages = userDao.findAll();
-        if (messages == null) {
-            messages = new ArrayList<User>();
+        List<User> users = userDao.findAll();
+        if (users == null) {
+            users = new ArrayList<User>();
         }
-        return messages;
+        return users;
     }
 
     @Override

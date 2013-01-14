@@ -11,12 +11,7 @@
 	</definition>
 
 
-	<definition name="home" extends="baseLayout">
-		<put-attribute name="title" value="Sec Sample" />
-	</definition>
-	<definition name="register" extends="baseLayout">
-		<put-attribute name="title" value="Sec Sample" />
-	</definition>
+	
 	
 	<definition name="error" extends="baseLayout">
 		<put-attribute name="title" value="Error" />
@@ -24,18 +19,28 @@
 	</definition>
 	
 	<definition name="welcome" extends="baseLayout">
-		<put-attribute name="title" value="Sec Sample" />
+		<put-attribute name="title" value="Welcome" />
 		<put-attribute name="body" value="/WEB-INF/views/custom/welcome.jsp" />
 	</definition>
 	
 	
 	<definition name="login" extends="baseLayout">
-		
+		<put-attribute name="title" value="Login" />
 	</definition>
 	
 	<definition name="denied" extends="baseLayout">
 		<put-attribute name="title" value="Access Denied" />
 		<put-attribute name="body" value="/WEB-INF/views/custom/denied.jsp" />
+	</definition>
+	
+	<definition name="logout" extends="baseLayout">
+		<put-attribute name="title" value="Logout" />
+		<put-attribute name="body" value="/WEB-INF/views/custom/logout.jsp" />
+	</definition>
+	
+	<definition name="admin" extends="baseLayout">
+		<put-attribute name="title" value="Admin" />
+		<put-attribute name="body" value="/WEB-INF/views/custom/admin.jsp" />
 	</definition>
 
 

@@ -3,12 +3,10 @@
 <div class="container">
 <div class="row" style="height: 20px !important;"></div>
 	<div class="row">
-	error
-	<div id="userrights">
-		<table class="table" id="right_table">
-			
-		</table>
+	<div class="alert alert-error">
+		Error page
 	</div>
+	
 	</div>
 
 </div>

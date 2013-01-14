@@ -6,20 +6,22 @@ import com.acme.doktorics.domain.Sorting;
 
 public interface IAbstractJpaDAO<T> {
 
-	void setClazz(final Class<T> clazzToSet);
+    void setClazz(final Class<T> clazzToSet);
 
-	T findOne(final Long id);
+    T findOne(final Long id);
 
-	List<T> findAll();
-	
-	void save(final T entity);
+    List<T> findAll();
 
-	void update(final T entity);
+    void save(final T entity);
 
-	void delete(final T entity);
+    void update(final T entity);
 
-	T findByCustomField(String key, String value);
-	 
-	List<T> findAllBySorting(String field, Sorting sorting) ;
-	
+    void delete(final T entity);
+
+    T findByCustomField(String key, String value);
+
+    T findElementByName(String field, String name);
+
+    List<T> findAllBySorting(String field, Sorting sorting);
+
 }
