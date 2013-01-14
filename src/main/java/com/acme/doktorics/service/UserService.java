@@ -16,4 +16,8 @@ public interface UserService{
 	void addNewUser(User user,String role);
 	
 	void update(User user);
+	
+	void addRole(Long id,String roleName);
+	
+	void removeRole(Long id,String roleName);
 }
