@@ -14,6 +14,11 @@ public interface RoleService {
     
     Role findByName(String name);
     
+    Role findMostSignificantRole();
+    
+    Role findMostWeakestRole();
     
     void update(Role role);
+
+	List<Role> findAllRolebyID();
 }
