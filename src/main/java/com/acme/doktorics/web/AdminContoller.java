@@ -43,6 +43,26 @@ public class AdminContoller extends AbstractController{
         
     }
     
+    @RequestMapping(value = { "/addrole/{id}/{name}" }, method = RequestMethod.POST)
+    public String addrole(@PathVariable String id,@PathVariable String name, Model model)
+    {
+        logger.info("Register user");
+        userService.addRole(Long.parseLong(id), name);
+        buildModel(model);
+        return "admin";
+        
+    }
+    
+    @RequestMapping(value = { "/removerole/{id}/{name}" }, method = RequestMethod.POST)
+    public String removerole(@PathVariable String id,@PathVariable String name, Model model)
+    {
+        logger.info("Register user");
+        userService.removeRole(Long.parseLong(id), name);
+        buildModel(model);
+        return "admin";
+        
+    }
+    
  
     
     
