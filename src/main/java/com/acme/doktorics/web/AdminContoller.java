@@ -29,7 +29,7 @@ public class AdminContoller extends AbstractController{
         logger.info("Delete user");
         userService.delete(id);
         buildModel(model);
-        return "admin";
+        return "redirect:/admin";
         
     }
     
@@ -39,7 +39,7 @@ public class AdminContoller extends AbstractController{
         logger.info("Register user");
         userService.addNewUser(user, role);
         buildModel(model);
-        return "admin";
+        return "redirect:/admin";
         
     }
     
@@ -49,7 +49,7 @@ public class AdminContoller extends AbstractController{
         logger.info("Register user");
         userService.addRole(Long.parseLong(id), name);
         buildModel(model);
-        return "admin";
+        return "redirect:/admin";
         
     }
     
@@ -59,7 +59,7 @@ public class AdminContoller extends AbstractController{
         logger.info("Register user");
         userService.removeRole(Long.parseLong(id), name);
         buildModel(model);
-        return "admin";
+        return "redirect:/admin";
         
     }
     
