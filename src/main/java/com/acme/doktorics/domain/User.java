@@ -1,6 +1,7 @@
 package com.acme.doktorics.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -38,7 +40,15 @@ public class User {
     private List<Role> roles = new ArrayList<Role>();
     
    
-    
+    @PreRemove
+    public void preRemove() {
+    	for (Role role :roles ) {
+			if (role.getUsers().contains(this)) {
+				role.removeUser(this);
+				
+			}
+		}
+    }
 
     public void addRole(Role role) {
         roles.add(role);
