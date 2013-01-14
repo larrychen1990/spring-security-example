@@ -19,31 +19,23 @@ import com.acme.doktorics.service.UserService;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class HomeController extends AbstractController{
 
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-    @Resource(name = "sessionRegistry")
-    private SessionRegistryImpl sessionRegistry;
-
-    @Autowired
-    private UserService userService;
-
+    
     /**
      * Simply selects the home view to render by returning its name.
      */
     @RequestMapping(value = { "/", "/home", "/welcome" }, method = RequestMethod.GET)
     public String home(Locale locale, Model model) {
         logger.info("Welcome home! The client locale is {}.", locale);
-        model.addAttribute("users", sessionRegistry.getAllPrincipals());
+        buildModel(model);
         return "welcome";
     }
 
     @RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
     public String admin(Locale locale, Model model) {
         logger.info("Admin view", locale);
-        model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
-        model.addAttribute("users", userService.findAll());
+        buildModel(model);
         return "admin";
     }
 }

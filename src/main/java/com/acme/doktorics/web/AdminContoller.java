@@ -12,6 +12,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,31 +20,15 @@ import com.acme.doktorics.domain.User;
 import com.acme.doktorics.service.UserService;
 
 @Controller
-public class AdminContoller {
+public class AdminContoller extends AbstractController{
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminContoller.class);
-    
-    
-    
-    @ModelAttribute("user")
-    public User getUser() {
-        return new User();
-    }
-    
-    @Resource(name = "sessionRegistry")
-    private SessionRegistryImpl sessionRegistry;
 
-    @Autowired
-    private UserService userService;
-    
-
-    @RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
-    public String deleteUser(@ModelAttribute String id,Locale locale, Model model)
+    @RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.POST)
+    public String deleteUser(@PathVariable String id,Locale locale, Model model)
     {
         logger.info("Delete user");
         userService.delete(id);
-        model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
-        model.addAttribute("users", userService.findAll());
+        buildModel(model);
         return "admin";
         
     }
@@ -53,11 +38,12 @@ public class AdminContoller {
     {
         logger.info("Register user");
         userService.addNewUser(user, role);
-        model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
-        model.addAttribute("users", userService.findAll());
+        buildModel(model);
         return "admin";
         
     }
+    
+ 
     
     
 }

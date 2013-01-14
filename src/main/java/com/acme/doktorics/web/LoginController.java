@@ -16,20 +16,8 @@ import com.acme.doktorics.service.RoleService;
 import com.acme.doktorics.service.UserService;
 
 @Controller
-public class LoginController {
+public class LoginController extends AbstractController {
 
-    @Resource(name = "sessionRegistry")
-    private SessionRegistryImpl sessionRegistry;
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
-
-    @ModelAttribute("user")
-    public User getUser() {
-        return new User();
-    }
 
     @RequestMapping("/denied")
     public String denied() {
@@ -48,7 +36,7 @@ public class LoginController {
     public String loginPost(@Valid User user, ModelMap model) {
         System.out.println("login post");
         System.out.println(user);
-
+        
         return "login";
 
     }

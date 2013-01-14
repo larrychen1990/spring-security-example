@@ -31,8 +31,11 @@
 									</c:forEach>
 								</select>
 							</td>
-							<td><button class="btn btn-primary" type="button">Delete
-									User</button></td>
+							<td>
+							<c:url value="/delete/${user.id}" var="url"></c:url>
+							<form action="${url}" method="POST">
+							<button  class="btn btn-primary" type="submit">Delete
+									User</button></form></td>
 						</tr>
 					</c:forEach>
 				</tbody>
