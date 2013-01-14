@@ -57,6 +57,13 @@ public class SimpleUserService implements UserService {
         }
         user.addRole(userRole);
         save(user);
+      
+    }
+
+    @Override
+    public void update(User user) {
+       userDao.update(user);
+        
     }
   
 

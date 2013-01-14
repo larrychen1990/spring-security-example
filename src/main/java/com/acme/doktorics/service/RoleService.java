@@ -13,4 +13,7 @@ public interface RoleService {
     void save(Role role);
     
     Role findByName(String name);
+    
+    
+    void update(Role role);
 }

@@ -14,4 +14,6 @@ public interface UserService{
 	void save(User messageObject);
 	
 	void addNewUser(User user,String role);
+	
+	void update(User user);
 }

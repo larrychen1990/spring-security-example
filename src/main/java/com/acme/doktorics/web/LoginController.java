@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.acme.doktorics.domain.User;
+import com.acme.doktorics.service.RoleService;
 import com.acme.doktorics.service.UserService;
 
 @Controller
@@ -22,6 +23,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @ModelAttribute("user")
     public User getUser() {
@@ -34,22 +37,24 @@ public class LoginController {
         return "denied";
     }
 
-   
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
         System.out.println("login get");
-        return "login";
+               return "login";
 
     }
-    
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPost(@Valid User user, ModelMap model) {
         System.out.println("login post");
         System.out.println(user);
+
         return "login";
 
     }
-    
+
+   
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap model) {
         System.out.println("logout get");
@@ -57,7 +62,6 @@ public class LoginController {
 
     }
 
-    
     @RequestMapping("/error")
     public String error() {
         System.out.println("error get");

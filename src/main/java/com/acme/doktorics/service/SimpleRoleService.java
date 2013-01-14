@@ -48,4 +48,10 @@ public class SimpleRoleService implements RoleService {
         return role;
     }
 
+    @Override
+    public void update(Role role) {
+        roleDao.update(role);
+        
+    }
+
 }

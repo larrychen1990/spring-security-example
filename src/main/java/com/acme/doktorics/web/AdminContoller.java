@@ -44,7 +44,7 @@ public class AdminContoller {
         userService.delete(id);
         model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
         model.addAttribute("users", userService.findAll());
-        return "/admin";
+        return "admin";
         
     }
     
@@ -55,7 +55,7 @@ public class AdminContoller {
         userService.addNewUser(user, role);
         model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
         model.addAttribute("users", userService.findAll());
-        return "/admin";
+        return "admin";
         
     }
     

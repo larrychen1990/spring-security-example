@@ -24,9 +24,13 @@
 							<td>${user.username}</td>
 							<td>${user.enabled}</td>
 							<td>${user.email}</td>
-							<td><c:forEach items="${user.roles}" var="role">
-									<span class="label">${role.name}</span>
-								</c:forEach></td>
+							<td>
+								<select id="role" name="role" class="select">
+									<c:forEach items="${user.roles}" var="role">
+									  <option value="${role.name}">${role.name}</option>
+									</c:forEach>
+								</select>
+							</td>
 							<td><button class="btn btn-primary" type="button">Delete
 									User</button></td>
 						</tr>
@@ -73,7 +77,7 @@
 				<div class="control-group">
 					<label class="control-label" for="role">Email: </label>
 					<div class="controls">
-						<select id="role" name="role">
+						<select id="roleSelect" name="role">
 						  <option value="ROLE_ADMIN">ADMIN</option>
 						  <option value="ROLE_USER">USER</option>
 						</select>
@@ -86,6 +90,10 @@
 			</div>
 		</form>
 	</div>
-
+<script type="text/javascript">
+$('#roleSelect').change(function() {
+	  alert($(this).val());
+	});
+</script>
 
 </div>
