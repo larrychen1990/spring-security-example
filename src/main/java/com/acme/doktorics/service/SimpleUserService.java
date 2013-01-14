@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acme.doktorics.dao.UserDAO;
+import com.acme.doktorics.domain.Role;
 import com.acme.doktorics.domain.User;
 
 
@@ -18,6 +19,8 @@ public class SimpleUserService implements UserService {
 
     @Autowired
     private UserDAO userDao;
+    @Autowired
+    private RoleService roleService;
     protected static final Logger logger = LoggerFactory.getLogger(SimpleUserService.class);
    
   
@@ -37,9 +40,23 @@ public class SimpleUserService implements UserService {
         userDao.delete(user);
     }
 
+    
+    
+    
     @Override
     public void save(User user) {
         userDao.save(user);
+    }
+
+    @Override
+    public void addNewUser(User user, String role) {
+        Role adminRole=roleService.findByName("ROLE_ADMIN");
+        Role userRole=roleService.findByName("ROLE_USER");
+        if(role.equals("ROLE_ADMIN")){
+            user.addRole(adminRole);
+        }
+        user.addRole(userRole);
+        save(user);
     }
   
 
