@@ -34,6 +34,9 @@ public abstract class AbstractController {
 	protected void buildModel(Model model) {
 		model.addAttribute("actualUser", sessionRegistry.getAllPrincipals());
 		model.addAttribute("users", userService.findAll());
+		model.addAttribute("roles",roleService.findAll());
+		model.addAttribute("adminRole",roleService.findMostSignificantRole());
+		model.addAttribute("sortedRoles",roleService.findAllRolebyID());
 	}
 
 }
