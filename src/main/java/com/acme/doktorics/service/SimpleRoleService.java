@@ -71,8 +71,7 @@ public class SimpleRoleService implements RoleService {
 
 	@Override
 	public List<Role> findAllRolebyID() {
-		List<Role> roles = (List<Role>) roleDao.findAllBySorting("id",
-				Sorting.ASC);
+		List<Role> roles = roleDao.findAllBySorting("id", Sorting.ASC);
 		return roles;
 	}
 

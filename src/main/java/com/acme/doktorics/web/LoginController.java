@@ -1,19 +1,13 @@
 package com.acme.doktorics.web;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.acme.doktorics.domain.User;
-import com.acme.doktorics.service.RoleService;
-import com.acme.doktorics.service.UserService;
 
 @Controller
 public class LoginController extends AbstractController {
